@@ -1,14 +1,14 @@
 package com.bridgelab.model;
 
 public class ResponseAssigningModel {
-private String mDate;
-private String mAndroidId;
-private String mConnectionType;
-private String mTotalEvents;
-private String mSessions;
-private String mScreenViews;
-private String mExit;
-private String mExitRate;
+public String mDate;
+public String mAndroidId;
+public String mConnectionType;
+public String mTotalEvents;
+public String mSessions;
+public String mScreenViews;
+public String mExit;
+public String mExitRate;
 
 public void setmSessions(String mSessions) {
 	this.mSessions = mSessions;
