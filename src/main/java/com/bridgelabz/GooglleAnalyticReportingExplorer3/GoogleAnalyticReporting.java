@@ -3,17 +3,24 @@ package com.bridgelabz.GooglleAnalyticReportingExplorer3;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.bridgelab.model.GaReportInputModel;
+import com.bridgelab.model.ResponseElementModel;
+import com.bridgelab.model.ResponseModel;
+import com.bridgelabz.csvfileCreator.AppOpenCsvCreator;
 import com.bridgelabz.csvfileCreator.DirectCsvFileCreator;
-import com.bridgelabz.inputReader.GaReportInputInfo;
 import com.bridgelabz.inputReader.GaReprtInfoArrayList;
 import com.bridgelabz.responseFetcher.GaReportResponseFetcher;
-import com.bridgelabz.responseReader.ResponseReaderConstructor;
 
 public class GoogleAnalyticReporting {
 
 	public static void main(String[] args) {
 
+		
 	
+		AppOpenCsvCreator appOpenCsvCreatorObject=new AppOpenCsvCreator();
+		try
+		{
+			
 		// creating object of GaReportResponseFetcher
 		GaReportResponseFetcher gaReportResponseFetcherObject = new GaReportResponseFetcher();
 
@@ -27,17 +34,25 @@ public class GoogleAnalyticReporting {
 		GaReprtInfoArrayList GaReprtInfoArrayListObject = new GaReprtInfoArrayList();
 		
 		// passing JSONpath and getting ArrayList of GaInputInfo
-		ArrayList<GaReportInputInfo> gaReportInputInfoArrayList = GaReprtInfoArrayListObject
+		ArrayList<GaReportInputModel> gaReportInputInfoArrayList = GaReprtInfoArrayListObject
 				.readInputJsonFile(jsonfilepath);
-
+		
+	
+		
+		
 		for (int i = 0; i < gaReportInputInfoArrayList.size(); i++) {
 			//  making ArrayList of response after passing jsoninputinfo  
-			ArrayList<ResponseReaderConstructor> responseReaderConstructorArrayList=gaReportResponseFetcherObject.getResponse(gaReportInputInfoArrayList.get(i));
+			ArrayList<ResponseModel> responseModelArrayList=gaReportResponseFetcherObject.getResponse(gaReportInputInfoArrayList.get(i));
 	
 			// creating csvfile by passing inputinfo and response
-			directCsvFileCreatorObject.directCsvFileCreator(gaReportInputInfoArrayList.get(i),responseReaderConstructorArrayList.get(i));
-
-				
+			ArrayList<ResponseElementModel> responseElementModelArrayList=directCsvFileCreatorObject.directCsvFileCreator(gaReportInputInfoArrayList.get(i),responseModelArrayList.get(i));
+			appOpenCsvCreatorObject.appOpenCsvCreator(responseElementModelArrayList.get(i),gaReportInputInfoArrayList.get(i));
+		}
+		}
+		catch(Exception e)
+		{
+			
+		e.printStackTrace();
 			
 		}
 

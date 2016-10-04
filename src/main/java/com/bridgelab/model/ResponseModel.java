@@ -3,11 +3,11 @@ package com.bridgelab.model;
 import java.util.ArrayList;
 
 public class ResponseModel {
-private int mrowArraySize;
-private int mMetricArraySize;
-private int mdimensionArraySize;
-private ArrayList<String> mDimensionResponseArrayList;
-private ArrayList<String> mMetricResponseArrayList;
+public int mrowArraySize;
+public int mMetricArraySize;
+public int mdimensionArraySize;
+public ArrayList<String> mDimensionResponseArrayList;
+public ArrayList<String> mMetricResponseArrayList;
 
 public void setRowArraySize(int rowArraySize) {
 	this.mrowArraySize = rowArraySize;

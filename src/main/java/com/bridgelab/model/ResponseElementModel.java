@@ -1,23 +1,30 @@
 package com.bridgelab.model;
 
 public class ResponseElementModel {
-	public String mGaId;
-	public String mGAdiscription;
+	public String mGaId=null;
+	public String mGAdiscription=null;
 	public String getmGAdiscription() {
 		return mGAdiscription;
 	}
 	public void setmGAdiscription(String mGAdiscription) {
 		this.mGAdiscription = mGAdiscription;
 	}
-	public String mDate;
-	public String mAndroidId;
-	public String mConnectionType;
-	public String mEventCategory;
-	public String mTotalEvents;
-	public String mSessions;
-	public String mScreenViews;
-	public String mExit;
-	public String mExitRate;
+	public String mDate=null;
+	public String mAndroidId=null;
+	public String mConnectionType=null;
+	public String mEventCategory=null;
+	public String mTotalEvents=null;
+	public String mSessions=null;
+	public String mScreenViews=null;
+	public String mExit=null;
+	public String mExitRate=null;
+	public int mrowArraySize;
+	public int getMrowArraySize() {
+		return mrowArraySize;
+	}
+	public void setMrowArraySize(int mrowArraySize) {
+		this.mrowArraySize = mrowArraySize;
+	}
 	public String getmGaId() {
 		return mGaId;
 	}
