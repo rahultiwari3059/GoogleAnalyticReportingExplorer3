@@ -9,6 +9,20 @@ public class ResponseElementModel {
 	public void setmGAdiscription(String mGAdiscription) {
 		this.mGAdiscription = mGAdiscription;
 	}
+	public int mDimensionSize;
+	public int getmDimensionSize() {
+		return mDimensionSize;
+	}
+	public void setmDimensionSize(int mDimensionSize) {
+		this.mDimensionSize = mDimensionSize;
+	}
+	public int getmMetricSize() {
+		return mMetricSize;
+	}
+	public void setmMetricSize(int mMetricSize) {
+		this.mMetricSize = mMetricSize;
+	}
+	public int mMetricSize;
 	public String mDate=null;
 	public String mAndroidId=null;
 	public String mConnectionType=null;

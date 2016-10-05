@@ -7,12 +7,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import com.bridgelab.model.GaReportInputModel;
 import com.bridgelab.model.SecretFileModel;
+import com.bridgelabz.csvfileCreator.SummaryReportcsvandelelementAssigner;
+import com.bridgelabz.csvfileCreator.MainCsvCreator;
 import com.bridgelabz.responseFetcher.InitializeAnalyticsReporting;
 
 public class GaReprtInfoArrayList {
-
-	// making ArrayList of GaReportInputInfo
-	ArrayList<GaReportInputInfo> gaReportInputInfoArrayList = new ArrayList<GaReportInputInfo>();
 
 	// ArrayList of model class
 	ArrayList<GaReportInputModel> GaReportInputModelArrayList = new ArrayList<GaReportInputModel>();
@@ -30,7 +29,7 @@ public class GaReprtInfoArrayList {
 			// casting object into JSONObject
 			JSONObject jsonObject = (JSONObject) obj;
 
-			// setting value in secretFileModelObject o
+			// setting value in secretFileModelObject
 			secretFileModelObject.setStartDate((String) jsonObject.get("startDate"));
 
 			secretFileModelObject.setEndDate((String) jsonObject.get("endDate"));
@@ -43,11 +42,19 @@ public class GaReprtInfoArrayList {
 
 			secretFileModelObject.setVIEW_ID((String) jsonObject.get("VIEW_ID"));
 
+			secretFileModelObject.setCsvFilePath((String) jsonObject.get("CSVFilePath"));
+
 			// passing secretFileModelObject to constructor to set all secret
 			// credential
 
 			InitializeAnalyticsReporting initializeAnalyticsReportingObject = new InitializeAnalyticsReporting(
 					secretFileModelObject);
+
+			// passing secret model object by constructor
+			SummaryReportcsvandelelementAssigner directCsvFileCreatorObject = new SummaryReportcsvandelelementAssigner(secretFileModelObject);
+
+			// passing secret model object by constructor
+			MainCsvCreator mainCsvCreatorObject = new MainCsvCreator(secretFileModelObject);
 
 			// casting into jsonArray
 			JSONArray gaReportInfoArray = (JSONArray) jsonObject.get("GAReportInfo");
@@ -57,8 +64,7 @@ public class GaReprtInfoArrayList {
 				GaReportInputModel gaReportInputModelObject = new GaReportInputModel();
 
 				// initializing all value
-				String GaId = null;
-				String GaDiscription = null;
+
 				ArrayList<String> metricArraList = new ArrayList<String>();
 				ArrayList<String> dimensionArraList = new ArrayList<String>();
 				ArrayList<String> dimensionFilterArraList = new ArrayList<String>();
@@ -69,12 +75,12 @@ public class GaReprtInfoArrayList {
 				dimensionArraList.clear();
 				dimensionFilterArraList.clear();
 
-				// converting GAID into string and adding into GaIdArraList
-				GaId = (String) gaReportInfoObject.get("GAID");
+				// setting gaid into model class
+
 				gaReportInputModelObject.setmGaID((String) gaReportInfoObject.get("GAID"));
 
-				// converting GAdiscription into string and printing same
-				GaDiscription = (String) gaReportInfoObject.get("GAdiscription");
+				// setting in model class
+
 				gaReportInputModelObject.setmGaDiscription((String) gaReportInfoObject.get("GAdiscription"));
 
 				// making metric array
@@ -84,6 +90,7 @@ public class GaReprtInfoArrayList {
 					// adding into metric ArrayList
 					metricArraList.add((String) metricJSONArray.get(k));
 				}
+				// setting metric in model class
 				gaReportInputModelObject.setmMetricArraList(metricArraList);
 
 				// making dimension JSONArray
@@ -92,6 +99,7 @@ public class GaReprtInfoArrayList {
 				for (int j = 0; j < dimensionsJSONArray.size(); j++) {
 					dimensionArraList.add((String) dimensionsJSONArray.get(j));
 				}
+				// setting dimension in model class
 				gaReportInputModelObject.setmDimensionArraList(dimensionArraList);
 
 				// Casting DimensionFilter into JSONArray
@@ -101,11 +109,8 @@ public class GaReprtInfoArrayList {
 					// adding into DimensionFilter ArrayList
 					dimensionFilterArraList.add((String) dimensionFilterJSONArray.get(l));
 				}
+				// setting dimension filter in model class
 				gaReportInputModelObject.setmDimensionFilterArraList(dimensionFilterArraList);
-				// adding into arrayList after creating object by passing
-				// argument to the constructor
-				gaReportInputInfoArrayList.add(new GaReportInputInfo(GaId, GaDiscription, metricArraList,
-						dimensionArraList, dimensionFilterArraList));
 
 				GaReportInputModelArrayList.add(gaReportInputModelObject);
 			}
